@@ -1,6 +1,10 @@
+"use client";
 import Link from "next/link";
+import { useContext } from "react";
+import { CartContext } from "../context";
 
 export default function Header() {
+  const { carts } = useContext(CartContext)!;
   const navitems = [
     { title: "Home", link: "/" },
     { title: "All Products", link: "/products" },
@@ -24,7 +28,7 @@ export default function Header() {
           href="/cart"
           className="text-gray-400 text-md hover:text-gray-100"
         >
-          Cart(0)
+          {`Cart(${carts.length})`}
         </Link>
       </div>
     </div>
