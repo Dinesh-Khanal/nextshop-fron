@@ -25,7 +25,7 @@ export default function Header() {
           </Link>
         ))}
         <Link
-          href="/cart"
+          href="/carts"
           className="text-gray-400 text-md hover:text-gray-100"
         >
           {`Cart(${carts.length})`}
