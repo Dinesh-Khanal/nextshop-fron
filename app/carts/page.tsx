@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { CartContext } from "../context";
 
 export default function Cart() {
-  const { carts } = useContext(CartContext)!;
+  const { carts, grandTotal } = useContext(CartContext)!;
   if (carts.length === 0) {
     return <div>No item added to cart</div>;
   }
@@ -23,6 +23,11 @@ export default function Cart() {
               <td>{ct.item?.price! * ct.quantity}</td>
             </tr>
           ))}
+          <tr>
+            <td></td>
+            <td>Grand Total</td>
+            <td>{grandTotal}</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -8,6 +8,7 @@ export interface ICarts {
 interface ICartContext {
   carts: ICarts[];
   addProduct: (product: IProduct) => void;
+  grandTotal: number;
 }
 const defaultCarts: ICarts[] = [];
 export const CartContext = createContext<ICartContext | null>(null);
@@ -23,8 +24,13 @@ export default function CartProvider({
       setCarts([...carts, { item: product, quantity: 1 }]);
     }
   };
+
+  let grandTotal = carts.reduce((pv, c) => {
+    return pv + c.item?.price! * c.quantity;
+  }, 0);
+
   return (
-    <CartContext.Provider value={{ carts, addProduct }}>
+    <CartContext.Provider value={{ carts, addProduct, grandTotal }}>
       {children}
     </CartContext.Provider>
   );
