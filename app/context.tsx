@@ -8,6 +8,8 @@ export interface ICarts {
 interface ICartContext {
   carts: ICarts[];
   addProduct: (product: IProduct) => void;
+  addMore: (product: IProduct) => void;
+  removeProduct: (product: IProduct) => void;
   grandTotal: number;
 }
 const defaultCarts: ICarts[] = [];
@@ -22,7 +24,11 @@ export default function CartProvider({
     const productAlready = carts.filter((c) => c.item?.id === product.id);
     if (productAlready.length === 0) {
       setCarts([...carts, { item: product, quantity: 1 }]);
-    } else {
+    }
+  };
+  const addMore = (product: IProduct) => {
+    const productAlready = carts.filter((c) => c.item?.id === product.id);
+    if (productAlready.length > 0) {
       let newQuantity = productAlready[0].quantity + 1;
       const newCarts = carts.map((c) =>
         c?.item?.id === product.id
@@ -32,13 +38,25 @@ export default function CartProvider({
       setCarts(newCarts);
     }
   };
+  const removeProduct = (product: IProduct) => {
+    const productAlready = carts.filter((c) => c.item?.id === product.id);
+    if (productAlready.length) {
+      setCarts(
+        carts.filter((c) => {
+          return c?.item?.id !== product.id;
+        })
+      );
+    }
+  };
 
-  let grandTotal = carts.reduce((pv, c) => {
+  const grandTotal = carts.reduce((pv, c) => {
     return pv + c.item?.price! * c.quantity;
   }, 0);
 
   return (
-    <CartContext.Provider value={{ carts, addProduct, grandTotal }}>
+    <CartContext.Provider
+      value={{ carts, addProduct, removeProduct, addMore, grandTotal }}
+    >
       {children}
     </CartContext.Provider>
   );
