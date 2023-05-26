@@ -2,11 +2,11 @@
 import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useContext, useEffect, useState } from "react";
-import { CartContext, ICarts } from "../context";
+import { CartContext } from "../context";
 
 function FeaturedProduct() {
   const [product, setProduct] = useState<IProduct>();
-  const { carts, setCarts } = useContext(CartContext)!;
+  const { addProduct } = useContext(CartContext)!;
   const pid = "646ae56fae77a830b5e0309f";
 
   useEffect(() => {
@@ -18,10 +18,6 @@ function FeaturedProduct() {
     const product = await result.json();
     setProduct(product);
   };
-  const handleAdd = () => {
-    const newCarts = [...carts, { item: product!, quantity: 1 }];
-    setCarts(newCarts);
-  };
   return (
     <div className="w-full bg-zinc-900 text-zinc-200 flex gap-4 py-4">
       <div className="min-w-[60vw]">
@@ -31,7 +27,7 @@ function FeaturedProduct() {
           <button className="border border-white p-1 rounded">Read more</button>
           <button
             className="btn-primary flex gap-1 items-center"
-            onClick={handleAdd}
+            onClick={() => addProduct(product!)}
           >
             <ShoppingCartIcon className="h-6 w-6" />
             <span>Add to cart</span>
