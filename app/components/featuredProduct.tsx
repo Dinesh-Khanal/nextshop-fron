@@ -1,23 +1,10 @@
-"use client";
 import Image from "next/image";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../context";
+import { getProductById } from "@/lib/products";
+import AddToCart from "./addToCart";
 
-function FeaturedProduct() {
-  const [product, setProduct] = useState<IProduct>();
-  const { addProduct } = useContext(CartContext)!;
+async function FeaturedProduct() {
   const pid = "646ae56fae77a830b5e0309f";
-
-  useEffect(() => {
-    fetchProduct();
-  }, []);
-
-  const fetchProduct = async () => {
-    const result = await fetch("http://localhost:3000/api/products/" + pid);
-    const product = await result.json();
-    setProduct(product);
-  };
+  const { product } = await getProductById(pid);
   return (
     <div className="w-full bg-zinc-900 text-zinc-200 flex gap-4 py-4">
       <div className="min-w-[60vw]">
@@ -25,13 +12,7 @@ function FeaturedProduct() {
         <p>{product?.description}</p>
         <div className="flex gap-4 mt-4 items-center">
           <button className="border border-white p-1 rounded">Read more</button>
-          <button
-            className="btn-primary flex gap-1 items-center"
-            onClick={() => addProduct(product!)}
-          >
-            <ShoppingCartIcon className="h-6 w-6" />
-            <span>Add to cart</span>
-          </button>
+          <AddToCart product={product!} />
         </div>
       </div>
       <div className="w-full h-56 relative mr-8">
