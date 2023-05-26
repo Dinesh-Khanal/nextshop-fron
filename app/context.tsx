@@ -22,6 +22,14 @@ export default function CartProvider({
     const productAlready = carts.filter((c) => c.item?.id === product.id);
     if (productAlready.length === 0) {
       setCarts([...carts, { item: product, quantity: 1 }]);
+    } else {
+      let newQuantity = productAlready[0].quantity + 1;
+      const newCarts = carts.map((c) =>
+        c?.item?.id === product.id
+          ? { item: product, quantity: newQuantity }
+          : c
+      );
+      setCarts(newCarts);
     }
   };
 
