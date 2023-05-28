@@ -27,21 +27,20 @@ export default function CartProvider({
 }) {
   const ls = typeof window !== undefined ? window.localStorage : null;
   const [carts, setCarts] = useState<ICarts[]>(() => {
-    if (ls?.getItem("cart")) {
-      return JSON.parse(ls.getItem("cart") as string);
-    } else {
-      return defaultCarts;
-    }
+    return JSON.parse(ls?.getItem("cart") as string) || defaultCarts;
   });
+
   useEffect(() => {
     ls?.setItem("cart", JSON.stringify(carts));
   }, [carts, ls]);
+
   const addProduct = (product: IProduct) => {
     const productAlready = carts.filter((c) => c.item?.id === product.id);
     if (productAlready.length === 0) {
       setCarts([...carts, { item: product, quantity: 1 }]);
     }
   };
+
   const addMore = (product: IProduct) => {
     const productAlready = carts.filter((c) => c.item?.id === product.id);
     if (productAlready.length > 0) {
