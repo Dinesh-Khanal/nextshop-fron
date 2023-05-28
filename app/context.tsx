@@ -1,11 +1,5 @@
 "use client";
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useState,
-  useEffect,
-} from "react";
+import { createContext, useState, useEffect } from "react";
 
 export interface ICarts {
   item: IProduct | null;
