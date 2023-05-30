@@ -1,10 +1,46 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context";
 
 export default function Cart() {
+  const [title, setTitle] = useState("");
+  const [pin, setPin] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const { carts, grandTotal, addMore, removeProduct } =
     useContext(CartContext)!;
+
+  const handleClick = () => {
+    const orderInfo = {
+      title,
+      pin,
+      address,
+      email,
+      city,
+      country,
+      carts,
+      grandTotal,
+    };
+    fetch("/api/checkout", {
+      headers: { "Content-type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(orderInfo),
+    })
+      .then((result) => result.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+    resetForm();
+  };
+  const resetForm = () => {
+    setTitle("");
+    setEmail("");
+    setPin("");
+    setAddress("");
+    setCity("");
+    setCountry("");
+  };
   if (!carts.length) {
     return (
       <div className="p-24 text-center text-3xl text-red-900 font-bold">
@@ -57,26 +93,60 @@ export default function Cart() {
       <div className="w-1/3">
         <h2 className="text-xl font-semibold text-center">Order Information</h2>
         <form>
-          <input type="text" placeholder="name" className="w-full py-1 px-3" />
-          <input type="text" placeholder="email" className="w-full py-1 px-3" />
-          <input type="text" placeholder="city" className="w-2/3 py-1 px-3" />
           <input
             type="text"
+            placeholder="name"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="w-full py-1 px-3"
+          />
+          <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full py-1 px-3"
+          />
+          <input
+            type="text"
+            placeholder="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="w-2/3 py-1 px-3"
+          />
+          <input
+            type="text"
+            name="pin"
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
             placeholder="postal code"
             className="w-1/3 py-1 px-3"
           />
           <input
             type="text"
+            name="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             placeholder="street address"
             className="w-full py-1 px-3"
           />
           <input
             type="text"
+            name="country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
             placeholder="country"
             className="w-full py-1 px-3"
           />
           <div className="w-full text-center">
-            <button className="btn-primary my-2">Continue to payment</button>
+            <button
+              type="button"
+              onClick={handleClick}
+              className="btn-primary my-2"
+            >
+              Continue to payment
+            </button>
           </div>
         </form>
       </div>
