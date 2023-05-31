@@ -5,3 +5,15 @@ interface IProduct {
   price: number;
   description: string;
 }
+
+interface IOrder {
+  id?: string;
+  title: string;
+  pin: string;
+  address: string;
+  email: string;
+  city: string;
+  country: string;
+  products: string[];
+  ammount: number;
+}

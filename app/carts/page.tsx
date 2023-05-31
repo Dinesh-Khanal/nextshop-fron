@@ -13,6 +13,7 @@ export default function Cart() {
     useContext(CartContext)!;
 
   const handleClick = () => {
+    const products = carts.map((ct) => ct.item?.title);
     const orderInfo = {
       title,
       pin,
@@ -20,8 +21,8 @@ export default function Cart() {
       email,
       city,
       country,
-      carts,
-      grandTotal,
+      products,
+      ammount: grandTotal.toString(),
     };
     fetch("/api/checkout", {
       headers: { "Content-type": "application/json" },

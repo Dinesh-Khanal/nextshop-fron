@@ -32,6 +32,18 @@ model categories {
   properties CategoriesProperties[]
 }
 
+model orders {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  address  String
+  ammount  String
+  city     String
+  country  String
+  email    String
+  pin      String
+  products String[]
+  title    String
+}
+
 model products {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   category    String
@@ -44,7 +56,7 @@ model products {
 model users {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   email         String
-  emailVerified Boolean @default(false)
+  emailVerified Boolean
   image         String
   name          String
 }
