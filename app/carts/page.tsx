@@ -22,6 +22,7 @@ export default function Cart() {
       city,
       country,
       products,
+      carts,
       ammount: grandTotal.toString(),
     };
     fetch("/api/checkout", {
