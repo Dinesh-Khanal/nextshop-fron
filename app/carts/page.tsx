@@ -1,17 +1,27 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context";
 
 export default function Cart() {
+  const [isSuccess, setIsSuccess] = useState(false);
   const [title, setTitle] = useState("");
   const [pin, setPin] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-  const { carts, grandTotal, addMore, removeProduct } =
+  const { carts, grandTotal, addMore, removeProduct, clearCart } =
     useContext(CartContext)!;
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+    if (window?.location.href.includes("success")) {
+      setIsSuccess(true);
+      clearCart();
+    }
+  }, [clearCart]);
   const handleClick = () => {
     const products = carts.map((ct) => ct.item?.title);
     const orderInfo = {
@@ -31,7 +41,11 @@ export default function Cart() {
       body: JSON.stringify(orderInfo),
     })
       .then((result) => result.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        if (data.url) {
+          window.location = data.url;
+        }
+      })
       .catch((error) => console.log(error));
     resetForm();
   };
@@ -43,6 +57,14 @@ export default function Cart() {
     setCity("");
     setCountry("");
   };
+  if (isSuccess) {
+    return (
+      <div className="p-24 text-center">
+        <h1 className="text-xl font-semibold">Thanks for your order!</h1>
+        <p>We will email you when your order will be sent.</p>
+      </div>
+    );
+  }
   if (!carts.length) {
     return (
       <div className="p-24 text-center text-3xl text-red-900 font-bold">

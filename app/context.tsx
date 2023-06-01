@@ -10,6 +10,7 @@ interface ICartContext {
   addProduct: (product: IProduct) => void;
   addMore: (product: IProduct) => void;
   removeProduct: (product: IProduct) => void;
+  clearCart: () => void;
   grandTotal: number;
 }
 const defaultCarts: ICarts[] = [];
@@ -58,13 +59,24 @@ export default function CartProvider({
     }
   };
 
+  const clearCart = () => {
+    setCarts(defaultCarts);
+  };
+
   const grandTotal = carts.reduce((pv, c) => {
     return pv + c.item?.price! * c.quantity;
   }, 0);
 
   return (
     <CartContext.Provider
-      value={{ carts, addProduct, removeProduct, addMore, grandTotal }}
+      value={{
+        carts,
+        addProduct,
+        removeProduct,
+        addMore,
+        clearCart,
+        grandTotal,
+      }}
     >
       {children}
     </CartContext.Provider>
