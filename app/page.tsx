@@ -1,4 +1,4 @@
-import AllProducts from "./components/allProducts";
+import NewProducts from "./components/newProducts";
 import FeaturedProduct from "./components/featuredProduct";
 
 export default async function Home() {
@@ -8,7 +8,7 @@ export default async function Home() {
         {/* @ts-expect-error Async Server Component */}
         <FeaturedProduct />
         {/* @ts-expect-error Async Server Component */}
-        <AllProducts />
+        <NewProducts />
       </div>
     </main>
   );

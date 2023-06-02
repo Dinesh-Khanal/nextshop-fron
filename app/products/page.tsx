@@ -1,8 +1,7 @@
-import React from "react";
 import { getProducts } from "@/lib/products";
-import Product from "./product";
+import Product from "../components/product";
 
-export default async function AllProducts() {
+export default async function NewProducts() {
   const { products } = await getProducts();
   return (
     <div>

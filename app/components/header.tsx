@@ -13,7 +13,9 @@ export default function Header() {
   ];
   return (
     <div className="flex fixed justify-between bg-zinc-900 w-full py-3 px-12 z-10">
-      <h2 className="text-xl font-semibold  text-zinc-300">Ecommerce</h2>
+      <h2 className="text-2xl font-semibold  text-zinc-300">
+        Sneha Online Store
+      </h2>
       <div className="flex gap-6">
         {navitems.map((itm, i) => (
           <Link

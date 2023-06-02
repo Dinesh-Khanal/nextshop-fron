@@ -8,7 +8,7 @@ async function FeaturedProduct() {
   return (
     <div className="w-full bg-zinc-900 text-zinc-200 flex gap-4 py-4">
       <div className="min-w-[60vw]">
-        <h1 className="text-3xl mb-4">{product?.title}</h1>
+        <h1 className="text-xl font-semibold mb-4">{product?.title}</h1>
         <p>{product?.description}</p>
         <div className="flex gap-4 mt-4 items-center">
           <button className="border border-white p-1 rounded">Read more</button>

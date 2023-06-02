@@ -22,7 +22,10 @@ export default function Cart() {
       clearCart();
     }
   }, [clearCart]);
-  const handleClick = () => {
+  const handleSubmit = () => {
+    if (title === "" || address === "" || email === "" || city === "") {
+      return;
+    }
     const products = carts.map((ct) => ct.item?.title);
     const orderInfo = {
       title,
@@ -115,19 +118,23 @@ export default function Cart() {
         </table>
       </div>
       <div className="w-1/3">
-        <h2 className="text-xl font-semibold text-center">Order Information</h2>
-        <form>
+        <h2 className="text-xl font-semibold text-center">
+          Shipping Information
+        </h2>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="name"
+            required
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full py-1 px-3"
           />
           <input
-            type="text"
+            type="email"
             placeholder="email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full py-1 px-3"
@@ -135,6 +142,7 @@ export default function Cart() {
           <input
             type="text"
             placeholder="city"
+            required
             value={city}
             onChange={(e) => setCity(e.target.value)}
             className="w-2/3 py-1 px-3"
@@ -153,6 +161,7 @@ export default function Cart() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="street address"
+            required
             className="w-full py-1 px-3"
           />
           <input
@@ -164,11 +173,7 @@ export default function Cart() {
             className="w-full py-1 px-3"
           />
           <div className="w-full text-center">
-            <button
-              type="button"
-              onClick={handleClick}
-              className="btn-primary my-2"
-            >
+            <button type="submit" className="btn-primary my-2">
               Continue to payment
             </button>
           </div>
