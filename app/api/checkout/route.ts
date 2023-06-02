@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     country,
     products,
     ammount,
+    paid: false,
     createdAt: new Date(),
   };
 

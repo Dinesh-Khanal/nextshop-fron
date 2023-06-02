@@ -15,5 +15,7 @@ interface IOrder {
   city: string;
   country: string;
   products: string[];
-  ammount: number;
+  ammount: string;
+  paid: boolean;
+  createdAt: Date;
 }

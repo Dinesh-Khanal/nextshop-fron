@@ -38,8 +38,9 @@ model orders {
   ammount   String
   city      String
   country   String
-  createdAt DateTime  @db.Date
+  createdAt DateTime @db.Date
   email     String
+  paid      Boolean
   pin       String
   products  String[]
   title     String
@@ -57,8 +58,7 @@ model products {
 model users {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   email         String
-  /// Could not determine type: the field only had null or empty values in the sample set.
-  emailVerified Json?
+  emailVerified Boolean
   image         String
   name          String
 }

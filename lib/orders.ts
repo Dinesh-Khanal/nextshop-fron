@@ -17,3 +17,15 @@ export async function createOrder(orderInfo: IOrder) {
     return { error };
   }
 }
+
+export async function updateOrder(id: string, paid: boolean) {
+  try {
+    const updatedOrder = await prisma.orders.update({
+      where: { id },
+      data: { paid: paid },
+    });
+    return { updatedOrder };
+  } catch (error) {
+    return { error };
+  }
+}
