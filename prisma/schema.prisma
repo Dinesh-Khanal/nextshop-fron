@@ -33,15 +33,16 @@ model categories {
 }
 
 model orders {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  address  String
-  ammount  String
-  city     String
-  country  String
-  email    String
-  pin      String
-  products String[]
-  title    String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  address   String
+  ammount   String
+  city      String
+  country   String
+  createdAt DateTime  @db.Date
+  email     String
+  pin       String
+  products  String[]
+  title     String
 }
 
 model products {
@@ -56,7 +57,8 @@ model products {
 model users {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
   email         String
-  emailVerified Boolean
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  emailVerified Json?
   image         String
   name          String
 }

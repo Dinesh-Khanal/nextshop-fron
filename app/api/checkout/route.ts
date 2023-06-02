@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     country,
     products,
     ammount,
+    createdAt: new Date(),
   };
 
   const order = await createOrder(orderInfo);
