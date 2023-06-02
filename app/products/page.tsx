@@ -1,5 +1,6 @@
 import { getProducts } from "@/lib/products";
 import Product from "../components/product";
+import Link from "next/link";
 
 export default async function NewProducts() {
   const { products } = await getProducts();
