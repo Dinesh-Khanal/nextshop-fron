@@ -76,8 +76,8 @@ export default function Cart() {
     );
   }
   return (
-    <div className="p-24 flex gap-3 w-full">
-      <div className="w-2/3">
+    <div className="p-24 flex flex-wrap gap-3 w-full">
+      <div className="w-full md:w-3/5">
         <h2 className="text-xl font-semibold">Cart</h2>
         <table className="text-sm text-blue-900 w-full">
           <tbody>
@@ -117,7 +117,7 @@ export default function Cart() {
           </tbody>
         </table>
       </div>
-      <div className="w-1/3">
+      <div className="w-full md:w-1/3">
         <h2 className="text-xl font-semibold text-center">
           Shipping Information
         </h2>

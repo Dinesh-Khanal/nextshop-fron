@@ -16,7 +16,7 @@ export default function Header() {
       <h2 className="text-2xl font-semibold  text-zinc-300">
         Sneha Online Store
       </h2>
-      <div className="flex gap-6">
+      <div className="hidden md:flex gap-6">
         {navitems.map((itm, i) => (
           <Link
             key={i}
