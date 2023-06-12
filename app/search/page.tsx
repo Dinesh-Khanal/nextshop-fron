@@ -18,7 +18,7 @@ export default async function SearchPage({
         Select Products
       </h1>
       <div className="flex">
-        <div className="w-1/2 md:w-1/4 bg-zinc-900 min-h-screen border border-zinc-500 rounded-xl m-4 mt-6">
+        <div className="w-1/2 md:w-1/4 bg-zinc-900 min-h-screen border border-zinc-500 rounded-xl mx-4 mb-2 mt-6">
           <h1 className="text-xl text-zinc-500 text-center p-2 border-b">
             Select category
           </h1>
