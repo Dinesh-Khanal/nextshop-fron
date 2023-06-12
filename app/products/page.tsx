@@ -17,6 +17,9 @@ export default async function NewProducts() {
             Select category
           </h1>
           <ul className="list-none p-4">
+            <li className="text-white p-1 w-full text-center border-b border-zinc-700 hover:bg-zinc-700 hover:text-white cursor-pointer">
+              <Link href="/products">All products</Link>
+            </li>
             {categories?.map((ct) => (
               <li
                 key={ct.id}

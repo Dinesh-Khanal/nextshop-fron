@@ -11,6 +11,7 @@ export default async function SearchPage({
   const { category } = searchParams;
   const { products } = await getProductsByCategory(category);
   const { categories } = await getCategories();
+  const active = "text-white";
   return (
     <div>
       <h1 className="text-3xl font-semibold text-center text-zinc-300">
@@ -22,12 +23,20 @@ export default async function SearchPage({
             Select category
           </h1>
           <ul className="list-none p-4">
+            <li className="text-zinc-400 p-1 w-full text-center border-b border-zinc-700 hover:bg-zinc-700 hover:text-white cursor-pointer">
+              <Link href="/products">All products</Link>
+            </li>
             {categories?.map((ct) => (
               <li
                 key={ct.id}
                 className="text-zinc-400 p-1 w-full text-center border-b border-zinc-700 hover:bg-zinc-700 hover:text-white cursor-pointer"
               >
-                <Link href={`/search?category=${ct.id}`}>{ct.name}</Link>
+                <Link
+                  href={`/search?category=${ct.id}`}
+                  className={ct.id === category ? active : ""}
+                >
+                  {ct.name}
+                </Link>
               </li>
             ))}
           </ul>

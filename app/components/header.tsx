@@ -2,9 +2,13 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../context";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const { carts } = useContext(CartContext)!;
+  const pathname = usePathname();
+  const active = "text-white text-md hover:text-gray-100";
+  const inactive = "text-zinc-400 text-md hover:text-gray-100";
   const navitems = [
     { title: "Home", link: "/" },
     { title: "All Products", link: "/products" },
@@ -21,14 +25,14 @@ export default function Header() {
           <Link
             key={i}
             href={itm.link}
-            className="text-gray-400 text-md hover:text-gray-100"
+            className={pathname === itm.link ? active : inactive}
           >
             {itm.title}
           </Link>
         ))}
         <Link
           href="/carts"
-          className="text-gray-400 text-md hover:text-gray-100"
+          className={pathname === "/carts" ? active : inactive}
         >
           {`Cart(${carts.length})`}
         </Link>
