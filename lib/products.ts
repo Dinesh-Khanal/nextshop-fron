@@ -17,3 +17,14 @@ export async function getProductById(id: string) {
     return { error };
   }
 }
+
+export async function getProductsByCategory(category: string) {
+  try {
+    const products = await prisma.products.findMany({
+      where: { category },
+    });
+    return { products };
+  } catch (error) {
+    return { error };
+  }
+}

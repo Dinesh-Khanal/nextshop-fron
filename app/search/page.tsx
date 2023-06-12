@@ -1,10 +1,15 @@
-import { getProducts } from "@/lib/products";
+import { getProductsByCategory } from "@/lib/products";
+import { getCategories } from "@/lib/categories";
 import Product from "../components/product";
 import Link from "next/link";
-import { getCategories } from "@/lib/categories";
 
-export default async function NewProducts() {
-  const { products } = await getProducts();
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: { category: string };
+}) {
+  const { category } = searchParams;
+  const { products } = await getProductsByCategory(category);
   const { categories } = await getCategories();
   return (
     <div>
