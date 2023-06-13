@@ -22,12 +22,12 @@ export default function CartProvider({
 }) {
   const [carts, setCarts] = useState<ICarts[]>([]);
   useEffect(() => {
-    const ls = typeof window !== undefined ? window.localStorage : null;
+    const ls = window.localStorage;
     const items = JSON.parse(ls?.getItem("cart") as string) || defaultCarts;
     setCarts(items);
   }, []);
   useEffect(() => {
-    const ls = typeof window !== undefined ? window.localStorage : null;
+    const ls = window.localStorage;
     ls?.setItem("cart", JSON.stringify(carts));
   }, [carts]);
 

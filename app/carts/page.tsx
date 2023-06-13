@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, FormEvent } from "react";
 import { CartContext } from "../context";
 
 export default function Cart() {
@@ -22,7 +22,8 @@ export default function Cart() {
       clearCart();
     }
   }, [clearCart]);
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
     if (title === "" || address === "" || email === "" || city === "") {
       return;
     }
