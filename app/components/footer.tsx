@@ -10,14 +10,16 @@ export default function Footer() {
         <Image
           src="/images/playstore.png"
           alt="playstore"
-          height={30}
-          width={120}
+          height={318}
+          width={1079}
+          className="w-32"
         />
         <Image
           src="/images/Appstore.png"
           alt="Appstore"
-          height={30}
-          width={120}
+          height={320}
+          width={1078}
+          className="w-32"
         />
       </div>
 
