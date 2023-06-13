@@ -20,14 +20,16 @@ export default function CartProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const ls = typeof window !== undefined ? window.localStorage : null;
-  const [carts, setCarts] = useState<ICarts[]>(() => {
-    return JSON.parse(ls?.getItem("cart") as string) || defaultCarts;
-  });
-
+  const [carts, setCarts] = useState<ICarts[]>([]);
   useEffect(() => {
+    const ls = typeof window !== undefined ? window.localStorage : null;
+    const items = JSON.parse(ls?.getItem("cart") as string) || defaultCarts;
+    setCarts(items);
+  }, []);
+  useEffect(() => {
+    const ls = typeof window !== undefined ? window.localStorage : null;
     ls?.setItem("cart", JSON.stringify(carts));
-  }, [carts, ls]);
+  }, [carts]);
 
   const addProduct = (product: IProduct) => {
     const productAlready = carts.filter((c) => c.item?.id === product.id);
